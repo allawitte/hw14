@@ -2,8 +2,8 @@ var pokemonApp = angular.module('PokemonApp', ['ngRoute']);
 
 angular.
 module('PokemonApp').
-config(['$routeProvider',
-    function config($routeProvider) {
+config(['$routeProvider','$httpProvider',
+    function config($routeProvider, $httpProvider) {
 
         $routeProvider.
         when('/pokemons', {
@@ -18,8 +18,16 @@ config(['$routeProvider',
             templateUrl: 'src/CreatePokemon/CreatePokemon.html',
             controller: 'CreatePokemonCtrl'
         }).
+            when('/edit/:pokemonId', {
+                templateUrl: 'src/EditPokemon/EditPokemon.html',
+                controller: 'EditPokemonCtrl'
+            }).
         otherwise({
             redirectTo: '/'
         });
+        $httpProvider.defaults.headers.common = {
+            "application-id": "F8C627E9-5428-BD94-FFFD-F4469E64C100",
+            "secret-key": "4089B3FB-BC5B-1967-FF9F-1D8475134200"
+        };
     }
 ]);
